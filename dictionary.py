@@ -128,7 +128,7 @@ fieldnames = [
     'Слогов после'
     ]
 
-with open('dictionary.csv', 'a', newline='') as csvfile:
+with open('dictionary.csv', 'w', newline='') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     d = OrderedDict(islice(word_dict.items(), 720, 780))

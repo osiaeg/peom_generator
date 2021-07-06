@@ -1,7 +1,5 @@
 from selenium import webdriver
 import time
-import logging
-
 
 options = webdriver.FirefoxOptions()
 options.headless = False

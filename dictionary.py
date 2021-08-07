@@ -8,18 +8,6 @@ from itertools import islice
 from accent import *
 import time
 
-_, _, filenames = next(os.walk('poems'))
-
-all_words = ''
-for poem in filenames:
-    with open(f"poems/{poem}", 'r') as f:
-        all_words += f.read()
-
-lines = all_words.split('\n')
-
-punctuation = string.punctuation + '—\xa0«»'
-
-words = []
 
 parts_of_speech = {
         'S': 'сущ.',
@@ -40,12 +28,6 @@ parts_of_speech = {
         'INTJ': 'межд.',
         'SPACE': 'пробел.'
         }
-
-# Убираем всю пунктуации из строк
-for line in lines:
-    line = "".join(c for c in line if c not in punctuation)
-    word_arr = line.split(' ')
-    words.extend(word_arr)
 
 
 # Получаем список уникальных слов
@@ -122,7 +104,7 @@ fieldnames = [
     'Гласные',
     'Кол-во слогов',
     'Часть речи',
-   'Начальная форма',
+    'Начальная форма',
     'Слогов до',
     'Ударный слог',
     'Слогов после'

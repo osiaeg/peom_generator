@@ -11,6 +11,7 @@ xpath_button = '//*[@id="ctl00_ctl00_BodyPlaceHolder_ContentPlaceHolder1_SubmitB
 ACCENT = 769
 SOGLACN = 'бвгджзйклмнпрстфхцчшщъь'
 
+
 def get_word_from_site(word : str) -> str:
     text_area = browser.find_element_by_xpath(xpath_textarea)
     button = browser.find_element_by_xpath(xpath_button)
@@ -21,22 +22,30 @@ def get_word_from_site(word : str) -> str:
     word = text_area.text
     return word
 
+
 def del_soglacn(word : str) -> str:
     word = ''.join(c for c in word if c not in SOGLACN)
     return word
+
 
 def get_accent_syllable(word : str) -> int:
     word = word.lower()
     word = del_soglacn(word)
     accent_index = None
+
     for index, char in enumerate(word):
         if ord(char) == ACCENT:
             accent_index = index - 1
+        if char == 'ё':
+            accent_index = index
+
     return accent_index
+
 
 def del_accent(word : str) -> str:
     word = ''.join(c for c in word if ord(c) != ACCENT)
     return word
+
 
 def parse_syllable(word : str) -> list:
     syllables_array = []
@@ -86,4 +95,3 @@ if __name__ == '__main__':
         print(f"Слогов до: {syllable_before}")
         print(f"Ударный слог: {accent_syllable}")
         print(f"Слогов после: {syllable_after}")
-

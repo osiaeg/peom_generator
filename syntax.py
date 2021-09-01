@@ -23,6 +23,7 @@ def get_word_info(word: str) -> dict:
             'Лицо' : translate_tag(p.tag.person),
             'Время' : translate_tag(p.tag.tense),
             'Переходность' : translate_tag(p.tag.transitivity),
-            'Залог' : translate_tag(p.tag.voice)
+            'Залог' : translate_tag(p.tag.voice),
+            'Начальная форма' : p.normal_form
             }
     return out_dict

@@ -1,7 +1,7 @@
 import csv
 from typing import List
 from time import sleep
-#from accent import *
+from accent import *
 from syntax import get_word_info
 import json
 
@@ -71,7 +71,7 @@ def work(word: str, file_writer) -> None:
 
 
 def main():
-    is_test = True
+    is_test = False
 
     with open('words_from_pandas.csv', 'r') as f:
         words = [word.strip() for word in f.readlines()]
@@ -103,7 +103,7 @@ def main():
 
         writer.writeheader()
 
-        parted_word_list = split_arr(words, 5)
+        parted_word_list = split_arr(words, 50)
 
         for part in parted_word_list:
             for word in part:
@@ -113,7 +113,7 @@ def main():
                     work(word, writer)
 
             print('------------------------')
-            sleep(5)
+            sleep(1)
 
 
 if __name__ == '__main__':

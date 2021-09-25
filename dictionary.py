@@ -3,6 +3,7 @@ from typing import List
 from time import sleep
 from accent import *
 from syntax import get_word_info
+import os
 import json
 
 
@@ -70,7 +71,7 @@ def work(word: str, file_writer) -> None:
         print(json.dumps(row, ensure_ascii=False, indent=4))
 
 
-def main():
+def main(index):
     is_test = False
 
     with open('words_from_pandas.csv', 'r') as f:
@@ -103,18 +104,27 @@ def main():
 
         writer.writeheader()
 
-        parted_word_list = split_arr(words, 50)
+        parted_word_list = split_arr(words, 5)
+        parted_word_list = parted_word_list[1:]
+        print(len(parted_word_list))
 
-        for part in parted_word_list:
-            for word in part:
-                if is_test:
-                    test(word, writer)
-                else:
-                    work(word, writer)
+        part = parted_word_list[index]
+        for word in part:
+            if is_test:
+                test(word, writer)
+            else:
+                work(word, writer)
 
-            print('------------------------')
-            sleep(1)
+        #print('------------------------')
+        #sleep(1)
+        os.system('pkill firefox')
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', action='store')
+
+    args = parser.parse_args()
+
+    main(int(args.i))
